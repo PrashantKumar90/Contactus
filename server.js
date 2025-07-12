@@ -43,20 +43,21 @@ app.post("/contact", async (req, res) => {
     await transporter.sendMail({
       from: process.env.GMAIL_USER,
       to: email,
-      subject: "Thanks for contacting us! Prashant Chaudhary",
+      subject: "Thanks for contacting us! || Prashant Chaudhary",
       html: `
         <p>Hi ${name},</p>
         <p>Thank you for reaching out! We've received your message and will get back to you soon.</p>
         <p>Your message:</p>
         <blockquote>${message}</blockquote>
-        <p>Prashant Chaudhary</p>
+        <p><strong>– Prashant Chaudhary</strong></p>
       `,
     });
 
-    // Redirect on success
-   
+    // ✅ Redirect to frontend (URL from .env)
+    res.redirect(process.env.REDIRECT_URL);
+
   } catch (error) {
-    console.error("Email sending failed:", error);
+    console.error("❌ Email sending failed:", error);
     res.status(500).json({ error: "Something went wrong. Please try again." });
   }
 });
