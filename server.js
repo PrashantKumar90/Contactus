@@ -24,10 +24,6 @@ const transporter = nodemailer.createTransport({
 // Contact Route
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
-
-  // Optional debug log
-  console.log("📥 Contact form submission received:", { name, email, message });
-
   if (!name || !email || !message) {
     return res.status(400).json({ error: "All fields are required." });
   }
@@ -69,4 +65,4 @@ app.post("/contact", async (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT);
